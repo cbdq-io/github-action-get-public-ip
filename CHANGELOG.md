@@ -1,7 +1,7 @@
 # Changelog
 
 
-## Unreleased
+## 1.0.0 (2025-07-27)
 
 ### Features
 
@@ -18,6 +18,8 @@
 * Add Makefile with tag target. [Ben Dalling]
 
 ### Build
+
+* Release/1.0.0. [Ben Dalling]
 
 * Add changelog target to Makefile. [Ben Dalling]
 

@@ -20,7 +20,7 @@ A lightweight, resilient GitHub Action that determines the **public IPv4 address
 ### 🔺 Basic (Use Default Sources)
 
 ```yaml
-- uses: cbdq-io/github-action-get-public-ip@v1
+- uses: cbdq-io/github-action-get-public-ip@1.0.0
   id: ip_step
 
 - run: echo "Public IP is ${{ steps.ip_step.outputs.ip }}"
@@ -43,16 +43,12 @@ Override the list of public IP services if you prefer to control or test specifi
 
 | Name      | Description                                                                                                                                                                                   |
 | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `sources` | *(optional)* Newline-separated list of URLs to use for public IP discovery. The action will try each in order until one returns a valid IPv4 address. Defaults to a predefined, reliable set. |
+| `sources` | *(optional)* Space-separated list of URLs to use for public IP discovery. The action will try each in order until one returns a valid IPv4 address. Defaults to a predefined, reliable set. |
 
 **Default value:**
 
 ```text
-https://ipv4.icanhazip.com
-https://ifconfig.me
-https://api.ipify.org
-https://checkip.amazonaws.com
-https://ipinfo.io/ip
+https://ipv4.icanhazip.com https://ifconfig.me https://api.ipify.org https://checkip.amazonaws.com https://ipinfo.io/ip
 ```
 
 ---
