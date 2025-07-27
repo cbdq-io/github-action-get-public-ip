@@ -1,3 +1,4 @@
+---
 name: "Get Resilient Public IP"
 description: "Attempts to get the public IPv4 address from multiple sources"
 inputs:
