@@ -1,0 +1,57 @@
+---
+name: Test Get Public IP Action
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test-default:
+    name: Test with Default IP Sources
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Run Action with Defaults
+        uses: ./
+        id: get_ip
+
+      - name: Print Output
+        run: |
+          echo "Detected IP: ${{ steps.get_ip.outputs.ip }}"
+
+  test-custom:
+    name: Test with Custom Source
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Run with Custom Source
+        uses: ./
+        id: get_ip_custom
+        with:
+          sources: https://api.ipify.org
+
+      - name: Print Output
+        run: |
+          echo "Custom Detected IP: ${{ steps.get_ip_custom.outputs.ip }}"
+
+  lint-yaml:
+    name: Lint YAML Files
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install yamllint
+        run: pip install yamllint
+
+      - name: Run yamllint
+        run: yamllint -s .
