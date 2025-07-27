@@ -19,6 +19,8 @@
 
 ### Build
 
+* Release/1.0.0. [Ben Dalling]
+
 * Add changelog target to Makefile. [Ben Dalling]
 
 ### Continuous Integration
