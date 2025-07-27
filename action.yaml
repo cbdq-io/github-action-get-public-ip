@@ -31,7 +31,8 @@ runs:
 
         for URL in "${URLS[@]}"; do
           echo "Trying to get IP from ${URL}..."
-          ip=$(curl -4 --max-time 5 "$URL" | grep -Eo '([0-9]{1,3}\.){3}[0-9]{1,3}')
+          curl -4 --max-time 5 "$URL"
+          ip=$(curl -s4 --max-time 5 "$URL" | grep -Eo '([0-9]{1,3}\.){3}[0-9]{1,3}')
           if [[ -n "$ip" ]]; then
             echo "✅ IP found: $ip"
             echo "ip=$ip" >> "$GITHUB_OUTPUT"
