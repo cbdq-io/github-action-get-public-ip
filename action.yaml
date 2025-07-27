@@ -1,0 +1,42 @@
+name: "Get Resilient Public IP"
+description: "Attempts to get the public IPv4 address from multiple sources"
+inputs:
+  sources:
+    description: >
+      A newline-separated list of URLs to fetch the public IP address from.
+      The action will try each in order until one succeeds.
+    required: false
+    default: |
+      https://ipv4.icanhazip.com
+      https://ifconfig.me
+      https://api.ipify.org
+      https://checkip.amazonaws.com
+      https://ipinfo.io/ip
+outputs:
+  ip:
+    description: "Public IPv4 address"
+    value: ${{ steps.get-ip.outputs.ip }}
+runs:
+  using: "composite"
+  steps:
+    - id: get-ip
+      shell: bash
+      run: |
+        echo "Using IP sources:"
+        echo "${{ inputs.sources }}"
+        echo
+
+        IFS=$'\n' read -rd '' -a SOURCES <<< "${{ inputs.sources }}"
+
+        for URL in "${SOURCES[@]}"; do
+          echo "Trying $URL..."
+          ip=$(curl -s --max-time 5 "$URL" | grep -Eo '([0-9]{1,3}\.){3}[0-9]{1,3}')
+          if [[ -n "$ip" ]]; then
+            echo "✅ IP found: $ip"
+            echo "ip=$ip" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+        done
+
+        echo "❌ Failed to retrieve public IP from all sources" >&2
+        exit 1
