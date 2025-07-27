@@ -34,9 +34,7 @@ Override the list of public IP services if you prefer to control or test specifi
 - uses: cbdq-io/github-action-get-public-ip@v1
   id: ip_custom
   with:
-    sources: |
-      https://api.ipify.org
-      https://checkip.amazonaws.com
+    sources: https://api.ipify.org https://checkip.amazonaws.com
 ```
 
 ---
