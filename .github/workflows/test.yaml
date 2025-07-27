@@ -30,7 +30,8 @@ jobs:
         uses: ./
         id: get_ip_custom
         with:
-          sources: https://api.ipify.org
+          sources: |
+            https://api.ipify.org
 
       - name: Print Output
         run: echo "Custom Detected IP: ${{ steps.get_ip_custom.outputs.ip }}"
